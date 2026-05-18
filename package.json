@@ -1,0 +1,43 @@
+{
+  "name": "repomind",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^7.3.5",
+    "@langchain/community": "^1.1.28",
+    "@langchain/core": "^1.1.46",
+    "@langchain/google-genai": "^2.1.30",
+    "@langchain/mongodb": "^0.1.0",
+    "@langchain/openai": "^0.3.16",
+    "@langchain/textsplitters": "^1.0.1",
+    "@octokit/rest": "^22.0.1",
+    "framer-motion": "^12.38.0",
+    "ioredis": "^5.10.1",
+    "langchain": "^0.3.15",
+    "lucide-react": "^1.16.0",
+    "mongodb": "^7.2.0",
+    "next": "16.2.6",
+    "octokit": "^5.0.5",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "simple-git": "^3.36.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

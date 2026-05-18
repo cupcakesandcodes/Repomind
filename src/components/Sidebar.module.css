@@ -1,0 +1,147 @@
+.sidebar {
+  background: #0a0a0b;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  z-index: 10;
+  width: 260px;
+}
+
+.sidebarHeader {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.logo a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.repoList {
+  flex: 1;
+  padding: 16px 12px;
+  overflow-y: auto;
+}
+
+.repoList::-webkit-scrollbar {
+  width: 0;
+}
+
+.sectionLabel {
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.repoItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.repoItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.activeRepo {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
+}
+
+.sidebarFooter {
+  padding: 16px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.newBtn {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.newBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.profileChip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  borderRadius: 12px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.streak {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 2px;
+}
+
