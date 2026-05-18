@@ -22,7 +22,7 @@ Open source can be incredibly intimidating. Figuring out *what* to work on and *
 <details open>
 <summary><b>🎯 AI-Driven Roadmaps & Personalized Dashboard</b></summary>
 <br/>
-<img src="assets/dashboard.png" width="900" alt="RepoMind Dashboard">
+<img src="assets/roadmap.png" width="900" alt="RepoMind Dashboard">
 We generate highly personalized, leveled contribution paths based on your current expertise. We gamify your journey from your first "Good First Issue" to maintainer status.
 </details>
 
