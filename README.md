@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="public/globe.svg" alt="RepoMind Logo" width="80" height="80">
+  <h1>RepoMind</h1>
+  <p><b>Your open source journey, personalised.</b></p>
+  <p>
+    RepoMind analyzes your GitHub profile, finds open-source issues perfectly matched to your skill level, and builds a day-by-day roadmap to get your first PR merged — and land your first job offer.
+  </p>
+</div>
 
-## Getting Started
+<br/>
 
-First, run the development server:
+## 🚀 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open source can be incredibly intimidating. Figuring out *what* to work on and *where* to start stops most developers before they even write a single line of code.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**RepoMind** is the intelligence layer for your open-source career. By deeply analyzing your past contributions, your language proficiency, and complex project codebases, RepoMind curates the perfect entry points into major open-source projects.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Core Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🎯 **AI-Driven Roadmaps**: We generate highly personalized, leveled contribution paths based on your current expertise. We gamify your journey from your first "Good First Issue" to maintainer status.
+- 💬 **Intelligent Contextual Chat**: Stop blindly searching through massive repositories. Ask architectural questions using natural language, and our RAG pipeline fetches the exact code, issues, and PR context you need to understand the codebase instantly.
+- 🔍 **Advanced Issue Discovery**: Filter open bounties and issues by difficulty, label, and competition level. RepoMind evaluates issue complexity so you never get overwhelmed.
+- 🏆 **Dynamic Developer Profiles**: Showcase your actual impact. We track your language proficiency, merged PRs, and bounty streaks to build a verifiable, enterprise-grade reputation profile that gets you hired.
+- 🔖 **Contextual Bookmarks**: Save complex issues and attach private research notes before starting your work.
 
-## Learn More
+## 🛠 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+RepoMind is built to scale, utilizing a modern, high-performance web stack:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend Framework**: Next.js 14+ (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS & Vanilla CSS modules
+- **AI & RAG Pipeline**: LangChain + Google Gemini (Embeddings & LLM)
+- **Vector Database**: MongoDB Vector Search
+- **Caching & Rate Limiting**: Redis
+- **Integrations**: GitHub REST API (Octokit)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💻 Running Locally
 
-## Deploy on Vercel
+### Prerequisites
+- Node.js (v18+)
+- npm, yarn, or pnpm
+- MongoDB Atlas (for Vector Search)
+- Upstash Redis (or local Redis instance)
+- Google Gemini API Key
+- GitHub Personal Access Token
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Setup Instructions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/cupcakesandcodes/Repomind.git
+   cd Repomind
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Variables:**
+   Create a `.env.local` file in the root of the project and add the following keys:
+   ```env
+   # AI & Embeddings
+   GOOGLE_API_KEY=your_gemini_api_key
+
+   # GitHub Integration
+   GITHUB_TOKEN=your_github_personal_access_token
+
+   # Vector Database
+   MONGODB_URI=your_mongodb_connection_string
+
+   # Caching
+   UPSTASH_REDIS_REST_URL=your_redis_url
+   UPSTASH_REDIS_REST_TOKEN=your_redis_token
+   ```
+
+4. **Start the Development Server:**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open the app:**
+   Navigate to [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🛡 Security & Privacy
+
+RepoMind **does not** permanently store your private source code. Our engine locally batches and processes files, extracting metadata, commit histories, and vector embeddings securely. If you authenticate for private repositories, we only use read-only access scopes.
+
+## 📄 License
+
+© RepoMind Inc. All rights reserved.
