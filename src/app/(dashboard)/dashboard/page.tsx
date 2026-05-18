@@ -229,7 +229,7 @@ export default function ExplorePage() {
             {categories.map(cat => (
               <button key={cat.name} onClick={() => handleCategoryClick(cat.name)}
                 style={{
-                  padding: '8px 16px', borderRadius: 12, border: 'none', cursor: 'pointer',
+                  padding: '8px 16px', borderRadius: 12, cursor: 'pointer',
                   fontSize: 12, fontWeight: 700, transition: 'all 0.2s',
                   background: activeCategory === cat.name ? 'rgba(170,130,220,0.15)' : 'rgba(255,255,255,0.03)',
                   color: activeCategory === cat.name ? 'rgba(170,130,220,0.9)' : 'rgba(255,255,255,0.4)',
