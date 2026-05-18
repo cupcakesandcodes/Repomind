@@ -46,9 +46,15 @@ export default function RoadmapPage() {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ username: profile.username, goal, hoursPerWeek: hours, regenerationContext: regenCtx }),
       });
-      if (!res.ok) throw new Error('Generation failed');
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      let data;
+      try {
+        data = await res.json();
+      } catch (err) {
+        throw new Error('Server returned invalid response');
+      }
+      if (!res.ok) {
+        throw new Error(data.error || `Server error (${res.status})`);
+      }
       setRoadmap(data); setVerified({}); setStep('view');
       // Save baseline so verification only counts NEW activity after this point
       localStorage.setItem('rm_ai_roadmap', JSON.stringify({
