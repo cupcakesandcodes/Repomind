@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Plus, Search, Star, TrendingUp, Users, GitPullRequest,
@@ -35,7 +35,7 @@ const LANG_COLORS: Record<string, string> = {
   Kotlin: '#A97BFF', Dart: '#00B4AB', Shell: '#89e051',
 };
 
-export default function ExplorePage() {
+function ExplorePageContent() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [repos, setRepos] = useState<TrendingRepo[]>([]);
   const [contributors, setContributors] = useState<TopContributor[]>([]);
@@ -382,5 +382,13 @@ export default function ExplorePage() {
       </div>
       <style jsx global>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
     </div>
+  );
+}
+
+export default function ExplorePage() {
+  return (
+    <Suspense fallback={<div style={{ padding: 80, textAlign: 'center', color: '#888' }}>Loading...</div>}>
+      <ExplorePageContent />
+    </Suspense>
   );
 }
