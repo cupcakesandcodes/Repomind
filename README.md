@@ -5,6 +5,8 @@
   <p>
     RepoMind analyzes your GitHub profile, finds open-source issues perfectly matched to your skill level, and builds a day-by-day roadmap to get your first PR merged — and land your first job offer.
   </p>
+  <br/>
+  <img src="assets/landing.png" width="900" alt="RepoMind Landing Page">
 </div>
 
 <br/>
@@ -17,9 +19,34 @@ Open source can be incredibly intimidating. Figuring out *what* to work on and *
 
 ## ✨ Core Features
 
-- 🎯 **AI-Driven Roadmaps**: We generate highly personalized, leveled contribution paths based on your current expertise. We gamify your journey from your first "Good First Issue" to maintainer status.
-- 💬 **Intelligent Contextual Chat**: Stop blindly searching through massive repositories. Ask architectural questions using natural language, and our RAG pipeline fetches the exact code, issues, and PR context you need to understand the codebase instantly.
-- 🔍 **Advanced Issue Discovery**: Filter open bounties and issues by difficulty, label, and competition level. RepoMind evaluates issue complexity so you never get overwhelmed.
+<details open>
+<summary><b>🎯 AI-Driven Roadmaps & Personalized Dashboard</b></summary>
+<br/>
+<img src="assets/dashboard.png" width="900" alt="RepoMind Dashboard">
+We generate highly personalized, leveled contribution paths based on your current expertise. We gamify your journey from your first "Good First Issue" to maintainer status.
+</details>
+
+<details open>
+<summary><b>💬 Intelligent Contextual Chat</b></summary>
+<br/>
+<img src="assets/chat.png" width="900" alt="RepoMind Chat">
+Stop blindly searching through massive repositories. Ask architectural questions using natural language, and our RAG pipeline fetches the exact code, issues, and PR context you need to understand the codebase instantly.
+</details>
+
+<details open>
+<summary><b>🔍 Advanced Issue Discovery</b></summary>
+<br/>
+<img src="assets/issues.png" width="900" alt="RepoMind Issues">
+Filter open bounties and issues by difficulty, label, and competition level. RepoMind evaluates issue complexity so you never get overwhelmed.
+</details>
+
+<details open>
+<summary><b>🧭 Explore Trending Open Source</b></summary>
+<br/>
+<img src="assets/explore.png" width="900" alt="RepoMind Explore">
+Discover new and trending repositories perfectly matched to your skills, categorised by domain (AI, Web, DevOps).
+</details>
+
 - 🏆 **Dynamic Developer Profiles**: Showcase your actual impact. We track your language proficiency, merged PRs, and bounty streaks to build a verifiable, enterprise-grade reputation profile that gets you hired.
 - 🔖 **Contextual Bookmarks**: Save complex issues and attach private research notes before starting your work.
 
