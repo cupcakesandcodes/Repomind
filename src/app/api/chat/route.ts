@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getVectorStore } from '@/lib/vector-store';
+import { getRepoIssues, getSingleIssue } from '@/lib/octokit';
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { RunnableSequence } from "@langchain/core/runnables";
@@ -84,14 +85,12 @@ export async function POST(req: NextRequest) {
         issues: async (input: any) => {
           if (input.issueNumber) return "User is asking about a specific issue (see below).";
           const { owner, repo } = parseOwnerRepo(input.repoUrl);
-          const { getRepoIssues } = await import('@/lib/octokit');
           const issues = await getRepoIssues(owner, repo);
           return JSON.stringify(issues, null, 2);
         },
         specificIssue: async (input: any) => {
           if (!input.issueNumber) return "No specific issue selected.";
           const { owner, repo } = parseOwnerRepo(input.repoUrl);
-          const { getSingleIssue } = await import('@/lib/octokit');
           const issue = await getSingleIssue(owner, repo, input.issueNumber);
           return issue ? JSON.stringify(issue, null, 2) : "Could not fetch specific issue.";
         },
