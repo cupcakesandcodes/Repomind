@@ -48,3 +48,25 @@ export async function getRepoDetails(owner: string, repo: string) {
     return null;
   }
 }
+
+export async function getSingleIssue(owner: string, repo: string, issueNumber: number) {
+  try {
+    const { data: issue } = await octokit.issues.get({
+      owner,
+      repo,
+      issue_number: issueNumber,
+    });
+
+    return {
+      title: issue.title,
+      body: issue.body,
+      url: issue.html_url,
+      number: issue.number,
+      labels: issue.labels.map((l: any) => l.name),
+    };
+  } catch (error) {
+    console.error("Error fetching single issue:", error);
+    return null;
+  }
+}
+
