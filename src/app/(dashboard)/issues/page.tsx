@@ -466,7 +466,7 @@ export default function IssuesPage() {
                   {/* Actions */}
                   <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                     <button
-                      onClick={() => router.push(`/dashboard/${issue.repo.replace('/', '_')}?issueTitle=${encodeURIComponent(issue.title)}`)}
+                      onClick={() => router.push(`/dashboard/${issue.repo.replace('/', '_')}?issueTitle=${encodeURIComponent(issue.title)}&issueNumber=${issue.number}`)}
                       style={{
                         flex: 1, background: 'rgba(250, 180, 50, 0.1)', border: '1px solid rgba(250, 180, 50, 0.2)',
                         borderRadius: 8, padding: '8px 10px', color: 'rgba(250, 180, 50, 0.9)', fontSize: 11, fontWeight: 700,
@@ -710,7 +710,7 @@ export default function IssuesPage() {
 
                 {/* Resume/Start Chat Button */}
                 <button
-                  onClick={() => router.push(`/dashboard/${issue.repo.replace('/', '_')}?issueTitle=${encodeURIComponent(issue.title)}`)}
+                  onClick={() => router.push(`/dashboard/${issue.repo.replace('/', '_')}?issueTitle=${encodeURIComponent(issue.title)}&issueNumber=${issue.number}`)}
                   style={{
                     width: '100%', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)',
                     borderRadius: 12, padding: '12px', color: '#fff', fontSize: 13, fontWeight: 700,

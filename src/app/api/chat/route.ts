@@ -10,9 +10,9 @@ export const maxDuration = 60; // 1 minute
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages, repoId } = await req.json();
-    if (!messages || !repoId) {
-      return NextResponse.json({ error: "Messages and repoId are required" }, { status: 400 });
+    const { messages, repoId, repoUrl, issueNumber } = await req.json();
+    if (!messages || !repoId || !repoUrl) {
+      return NextResponse.json({ error: "Messages, repoId, and repoUrl are required" }, { status: 400 });
     }
 
     const lastMessage = messages[messages.length - 1].content;
@@ -52,6 +52,9 @@ export async function POST(req: NextRequest) {
       Current Issues in Repository:
       {issues}
 
+      Specific Issue Selected by User:
+      {specificIssue}
+
       Codebase Context:
       {context}
 
@@ -60,6 +63,12 @@ export async function POST(req: NextRequest) {
     `;
 
     const prompt = PromptTemplate.fromTemplate(template);
+
+    const parseOwnerRepo = (url: string) => {
+      const match = url.match(/github\.com\/([^/]+)\/([^/.]+)/);
+      if (!match) return { owner: '', repo: '' };
+      return { owner: match[1], repo: match[2] };
+    };
 
     // 4. Create RAG Chain
     const chain = RunnableSequence.from([
@@ -73,16 +82,21 @@ export async function POST(req: NextRequest) {
           return formatDocumentsAsString(docs);
         },
         issues: async (input: any) => {
-          const [owner, repo] = input.repoId.split('-');
+          if (input.issueNumber) return "User is asking about a specific issue (see below).";
+          const { owner, repo } = parseOwnerRepo(input.repoUrl);
           const { getRepoIssues } = await import('@/lib/octokit');
           const issues = await getRepoIssues(owner, repo);
           return JSON.stringify(issues, null, 2);
         },
-        question: (input: any) => input.question,
-        repoUrl: (input: any) => {
-          const [owner, repo] = input.repoId.split('-');
-          return `https://github.com/${owner}/${repo}`;
+        specificIssue: async (input: any) => {
+          if (!input.issueNumber) return "No specific issue selected.";
+          const { owner, repo } = parseOwnerRepo(input.repoUrl);
+          const { getSingleIssue } = await import('@/lib/octokit');
+          const issue = await getSingleIssue(owner, repo, input.issueNumber);
+          return issue ? JSON.stringify(issue, null, 2) : "Could not fetch specific issue.";
         },
+        question: (input: any) => input.question,
+        repoUrl: (input: any) => input.repoUrl,
       },
       prompt,
       model,
@@ -90,7 +104,7 @@ export async function POST(req: NextRequest) {
     ]);
 
     // 5. Execute Chain and Stream Response
-    const stream = await chain.stream({ question: lastMessage, repoId });
+    const stream = await chain.stream({ question: lastMessage, repoId, repoUrl, issueNumber });
 
 
     // Convert stream to ReadableStream for Next.js response

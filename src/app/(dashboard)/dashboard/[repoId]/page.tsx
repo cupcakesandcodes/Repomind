@@ -7,10 +7,12 @@ import { useParams, useSearchParams } from 'next/navigation';
 export default function RepoChatPage() {
   const params = useParams();
   const searchParams = useSearchParams();
-   const repoId = params.repoId as string;
-   const issueTitle = searchParams.get('issueTitle') || undefined;
-   const [repoUrl, setRepoUrl] = useState<string | null>(null);
-   const [loading, setLoading] = useState(true);
+  const repoId = params.repoId as string;
+  const issueTitle = searchParams.get('issueTitle') || undefined;
+  const issueNumberParam = searchParams.get('issueNumber');
+  const issueNumber = issueNumberParam ? parseInt(issueNumberParam, 10) : undefined;
+  const [repoUrl, setRepoUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const saved = localStorage.getItem('repomind_history');
@@ -22,7 +24,7 @@ export default function RepoChatPage() {
         foundUrl = repo.url;
       }
     }
-    
+
     if (!foundUrl) {
       if (repoId.includes('_')) {
         const [owner, repo] = repoId.split('_');
@@ -47,7 +49,7 @@ export default function RepoChatPage() {
 
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <ChatWindow key={repoId} repoId={repoId} repoUrl={repoUrl || 'Unknown'} initialIssueTitle={issueTitle} />
+      <ChatWindow key={repoId} repoId={repoId} repoUrl={repoUrl || 'Unknown'} initialIssueTitle={issueTitle} initialIssueNumber={issueNumber} />
     </div>
   );
 }

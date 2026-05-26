@@ -19,7 +19,7 @@ interface SimilarIssue {
   labels: string[];
 }
 
-export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { repoId: string, repoUrl: string, initialIssueTitle?: string }) {
+export default function ChatWindow({ repoId, repoUrl, initialIssueTitle, initialIssueNumber }: { repoId: string, repoUrl: string, initialIssueTitle?: string, initialIssueNumber?: number }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -77,7 +77,7 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMessage], repoId }),
+        body: JSON.stringify({ messages: [...messages, userMessage], repoId, repoUrl, issueNumber: initialIssueNumber }),
       });
       const reader = response.body?.getReader();
       if (!reader) throw new Error('No reader');
@@ -106,7 +106,7 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: '#080909' }}>
-      
+
       {/* Header */}
       <div style={{
         height: 56,
@@ -121,7 +121,7 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
           <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', fontWeight: 500 }}>Chat</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <button 
+          <button
             onClick={() => {
               const saved = localStorage.getItem('repomind_bookmarks');
               const bookmarks = saved ? JSON.parse(saved) : [];
@@ -143,7 +143,7 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
           >
             <BookmarkPlus size={18} />
           </button>
-          <button 
+          <button
             onClick={() => setShowDraft(true)}
             style={{
               display: 'flex', alignItems: 'center', gap: 6,
@@ -202,7 +202,7 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
                         <div style={{ width: 5, height: 5, borderRadius: '50%', background: 'rgba(255,255,255,0.2)', animation: 'pulse 1.2s ease infinite 0.4s' }} />
                       </div>
                     ) : (
-                      <ReactMarkdown 
+                      <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         components={{
                           p: ({ children }) => <p style={{ marginBottom: '1.2em', lineHeight: 1.7 }}>{children}</p>,
@@ -271,8 +271,8 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
                     padding: '10px 8px',
                   }}
                 />
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={isLoading || !input.trim()}
                   style={{
                     background: '#fff', color: '#000', border: 'none', cursor: 'pointer',
@@ -312,7 +312,7 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
               <h3 style={{ fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 16 }}>
                 Similar Solved Issues
               </h3>
-              
+
               {loadingSimilar ? (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>
                   <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} /> Finding similar...
@@ -327,8 +327,8 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
                       background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)',
                       borderRadius: 12, padding: 14, transition: 'background 0.2s'
                     }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
+                      onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
+                      onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
                     >
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 6 }}>
                         <CheckCircle size={14} color="rgba(170,130,220,0.6)" style={{ flexShrink: 0, marginTop: 2 }} />
@@ -389,7 +389,7 @@ export default function ChatWindow({ repoId, repoUrl, initialIssueTitle }: { rep
               marginBottom: 24,
               whiteSpace: 'pre-wrap',
             }}>
-{`## Summary
+              {`## Summary
 Fixed hydration mismatch in Sidebar component.
 
 ## Changes
